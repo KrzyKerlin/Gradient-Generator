@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import Home from '../views/Home.vue';
-import GradientGenerator from '../views/gradientGenerator/gradientGenerator.vue';
+import GradientGenerator from '../views/gradientGenerator.vue';
 import ColorPalette from '../views/colorPalette.vue';
 import FontsList from '../views/fontsList.vue';
 import WebpConverter from '../views/webpConverter.vue'
