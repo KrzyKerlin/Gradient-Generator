@@ -1,5 +1,6 @@
 <template>
   <v-container class="d-flex flex-column align-center">
+    <BackButton />
     <h1 class="mb-8 text-center text-primary">Font <span class="second">Picker</span><span class="third"> App</span></h1>
 
     <div class="input-container align-center">

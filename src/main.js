@@ -3,4 +3,12 @@ import App from './App.vue';
 import router from './router/index';
 import vuetify from './plugins/vuetify';
 
-createApp(App).use(router).use(vuetify).mount('#app')
+import BackButton from "@/components/backLogo.vue";
+
+const app = createApp(App);
+
+app.component('BackButton', BackButton);
+
+app.use(router);
+app.use(vuetify);
+app.mount('#app');

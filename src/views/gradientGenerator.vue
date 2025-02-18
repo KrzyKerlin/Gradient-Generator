@@ -1,5 +1,6 @@
 <template>
   <v-container class="fill-height d-flex align-center justify-center">
+    <BackButton />
     <v-card class="mx-auto pa-6 text-center" max-width="500" elevation="10">
       <!-- Gradient Text -->
       <v-sheet class="mb-4">

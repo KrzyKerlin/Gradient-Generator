@@ -1,5 +1,6 @@
 <template>
     <v-container class="d-flex flex-column align-center">
+      <BackButton />
       <h1 class="mb-4 text-center text-indigo-darken-4">WebP Converter</h1>
   
       <v-card class="d-flex justify-center align-center" elevation="2" height="60vh" max-width="90%" width="100%" @click="resetImage">

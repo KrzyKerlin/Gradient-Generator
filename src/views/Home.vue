@@ -1,6 +1,7 @@
 <template>
     <v-container class="container">
-        <div class="container-tool">
+      <BackButton />
+        <div class="container-tool text-center">
             <h1>My Tools App</h1>
             <div class="tools">
                 <div class="tool-box">

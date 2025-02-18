@@ -25,9 +25,14 @@ body .container .container-tool {
   z-index: 1;
 }
 body .container .container-tool h1 {
-  font-size: 4em;
+  font-size: 2.5em;
   color: white;
   margin-bottom: 40px;
+}
+@media (min-width: 768px) {
+  body .container .container-tool h1 {
+    font-size: 3.5em;
+  }
 }
 body .container .container-tool .tools {
   display: grid;

@@ -1,5 +1,6 @@
 <template>
     <v-container class="d-flex flex-column align-center">
+      <BackButton />
       <h1 class="mb-4 text-center text-primary">Color Palette Generator</h1>
   
       <v-btn @click="generatePalettes" color="primary" size="large" class="btn">
