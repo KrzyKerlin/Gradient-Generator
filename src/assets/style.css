@@ -27,7 +27,7 @@ body .container .container-tool {
 body .container .container-tool h1 {
   font-size: 2.5em;
   color: white;
-  margin-bottom: 40px;
+  margin-bottom: 70px;
 }
 @media (min-width: 768px) {
   body .container .container-tool h1 {
@@ -35,21 +35,17 @@ body .container .container-tool h1 {
   }
 }
 body .container .container-tool .tools {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  max-width: 700px;
-}
-@media (min-width: 768px) {
-  body .container .container-tool .tools {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-  }
+  max-width: 850px;
 }
 body .container .container-tool .tools .tool-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
   padding: 25px;
+  height: 200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.3s ease;
@@ -59,7 +55,7 @@ body .container .container-tool .tools .tool-box:hover {
   transform: scale(1.05);
 }
 body .container .container-tool .tools .tool-box h3 {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 10px;
 }
@@ -75,6 +71,11 @@ body .container .container-tool .tools .tool-box .btn {
 }
 body .container .container-tool .tools .tool-box .btn:hover {
   background-color: #6a11cb;
+}
+@media (min-width: 768px) {
+  body .container .container-tool .tools .v-carousel {
+    display: none;
+  }
 }
 body .container .bg-space {
   position: absolute;
@@ -135,6 +136,12 @@ body .container .bg-space .squares li:nth-child(6) {
   width: 80px;
   height: 80px;
   animation-delay: 5s;
+}
+
+.v-carousel__controls {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  bottom: 100px !important;
 }
 
 /* Animations */

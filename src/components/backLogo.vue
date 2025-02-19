@@ -17,7 +17,7 @@
   
 <style scoped>
   .back-button {
-    position: fixed;
+    position: absolute;
     top: 5px;
     left: 0;
     z-index: 1000;
