@@ -1,7 +1,7 @@
 <template>
     <v-container class="d-flex flex-column align-center">
       <BackButton />
-      <h1 class="mb-4 text-center text-primary">Color Palette Generator</h1>
+      <h1 class="my-4 text-center text-primary">Color Palette</h1>
   
       <v-btn @click="generatePalettes" color="primary" size="large" class="btn">
         Generate 
@@ -16,10 +16,10 @@
               <v-sheet
                 v-for="(color, i) in palette"
                 :key="i" 
-                width="100" 
-                height="120" 
+                :width="isMobile ? 70 : 100"
+                :height="isMobile ? 100 : 120"
                 class="d-flex align-center justify-center text-white text-bold rounded-lg mb-6"
-                :style="{backgroundColor: color, border: '2px solid black', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',}"
+                :style="{backgroundColor: color, border: '2px solid black', fontSize:'12px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',}"
                 >{{ color }}
               </v-sheet>
             </v-sheet>
@@ -37,6 +37,18 @@
     name: 'ColorPalette',
     setup() {
       const palettes = ref([]);
+      const isMobile = ref(window.innerWidth < 480);
+
+      const handleResize = () => {
+        isMobile.value = window.innerWidth < 480;
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      // Cleanup listener on component unmount
+      onUnmounted(() => {
+        window.removeEventListener('resize', handleResize);
+      });
   
       // Generates a random hex color
       const getRandomColor = () => {
@@ -68,7 +80,8 @@
   
       return {
         palettes,
-        generatePalettes
+        generatePalettes,
+        isMobile
       };
     }
   };
