@@ -17,6 +17,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
 
         .container-tool {
             position: relative;
@@ -28,10 +29,11 @@ body {
             h1 {
               font-size: 2.5em;
               color: white;
-              margin: 50px auto;
+              margin: 30px auto;
           
               @media (min-width: 768px) {
                 font-size: 3.5em;
+                margin: 10px auto;
               }
             }
 
@@ -46,7 +48,7 @@ body {
                     background-color: rgba(255, 255, 255, 0.8);
                     border-radius: 10px;
                     padding: 25px;
-                    height: 200px;
+                    height: 220px;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     text-align: center;
                     transition: transform 0.3s ease;
@@ -54,6 +56,10 @@ body {
 
                     &:hover {
                         transform: scale(1.05);
+                    }
+
+                    @media (min-width: 768px) {
+                      height: 180px;
                     }
 
                     h3 {
@@ -161,7 +167,7 @@ body {
 .v-carousel__controls {
   background: transparent !important;
   color: #ffffffcc !important;
-  bottom: 100px !important;
+  bottom: 140px !important;
 }
   
 /* Animations */

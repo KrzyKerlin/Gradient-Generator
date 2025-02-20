@@ -35,7 +35,7 @@
         </v-row>
 
         <v-carousel class="d-md-none" :show-arrows="false"> <!-- Slider only on mobile -->
-          <v-carousel-item v-for="(tool, i) in tools" :key="i" class="tools">
+          <v-carousel-item v-for="(tool, i) in tools" :key="i" class="tools my-5">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center ma-2 pa-2">
               <v-icon :start="tool.icon.start" size="40">{{ tool.icon.name }}</v-icon>
               <h3>{{ tool.title }}</h3>
@@ -57,6 +57,7 @@
           <li></li>
         </ul>
       </v-responsive>
+      <Footer />
     </v-container>
 </template>
 

@@ -16,6 +16,7 @@ body .container {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 body .container .container-tool {
   position: relative;
@@ -27,11 +28,12 @@ body .container .container-tool {
 body .container .container-tool h1 {
   font-size: 2.5em;
   color: white;
-  margin: 50px auto;
+  margin: 30px auto;
 }
 @media (min-width: 768px) {
   body .container .container-tool h1 {
     font-size: 3.5em;
+    margin: 10px auto;
   }
 }
 body .container .container-tool .tools {
@@ -45,7 +47,7 @@ body .container .container-tool .tools .tool-box {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
   padding: 25px;
-  height: 200px;
+  height: 220px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.3s ease;
@@ -53,6 +55,11 @@ body .container .container-tool .tools .tool-box {
 }
 body .container .container-tool .tools .tool-box:hover {
   transform: scale(1.05);
+}
+@media (min-width: 768px) {
+  body .container .container-tool .tools .tool-box {
+    height: 180px;
+  }
 }
 body .container .container-tool .tools .tool-box h3 {
   font-size: 1.5rem;
@@ -141,7 +148,7 @@ body .container .bg-space .squares li:nth-child(6) {
 .v-carousel__controls {
   background: transparent !important;
   color: rgba(255, 255, 255, 0.8) !important;
-  bottom: 100px !important;
+  bottom: 140px !important;
 }
 
 /* Animations */
