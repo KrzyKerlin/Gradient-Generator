@@ -2,20 +2,28 @@
     <v-container class="d-flex flex-column align-center">
       <BackButton />
       <h1 class="mb-4 text-center text-indigo-darken-4">WebP Converter</h1>
-  
-      <v-card class="d-flex justify-center align-center" elevation="2" height="60vh" max-width="90%" width="100%" @click="resetImage">
-        <input type="file" @change="loadImage" ref="fileInput" class="d-none" id="fileInput" />
-        <canvas ref="canvas" class="w-100 h-100"></canvas>
-  
-        <v-btn v-if="!imgLoaded" color="primary" @click="triggerFileInput" class="position-absolute">
-          Upload Image
-        </v-btn>
-      </v-card>
-
-      <v-btn v-if="imgLoaded" color="success" class="mt-3" @click="downloadImage">
-        Download WebP
+    
+      <v-btn color="primary" @click="triggerFileInput" class="my-4">
+      Upload Images
       </v-btn>
-
+      <input type="file" multiple @change="loadImages" ref="fileInput" class="d-none" id="fileInput" />
+    
+      <v-card v-if="files.length" class="d-flex flex-column align-center pa-4" elevation="2">
+        <div class="file-list w-100">
+          <h3>Uploaded Files:</h3>
+          <v-list dense>
+            <v-list-item v-for="(file, index) in files" :key="index">
+              <v-list-item-icon>
+                <v-icon>mdi-file-image</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>{{ file.name }}</v-list-item-content>
+            </v-list-item>
+          </v-list>
+          <v-btn color="success" class="mt-3 mx-auto" @click="downloadImages">
+            Download WebP
+          </v-btn>
+        </div>
+      </v-card>
     </v-container>
 </template>
   
@@ -24,27 +32,12 @@ import { ref, onMounted, onUnmounted } from "vue";
 
 export default {
   setup() {
-    const imgLoaded = ref(false);
-    const canvas = ref(null);
+    const files = ref([]);
 
-    // Load the image into canvas
-    const loadImage = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const img = new Image();
-          img.onload = () => {
-            imgLoaded.value = true;
-            const ctx = canvas.value.getContext("2d");
-            canvas.value.width = img.width;
-            canvas.value.height = img.height;
-            ctx.drawImage(img, 0, 0);
-          };
-          img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
+    // Load the images into the files array
+    const loadImages = (event) => {
+      const selectedFiles = Array.from(event.target.files);
+      files.value = selectedFiles;
     };
 
     // Trigger file input click
@@ -52,40 +45,53 @@ export default {
       document.getElementById("fileInput").click();
     };
 
-    // Reset image on click
-    const resetImage = () => {
-      const ctx = canvas.value.getContext("2d");
-      ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);  // delete canva (img)
-      imgLoaded.value = false;  // show upload btn
-    };
-
-    // Download canvas image as WebP
-    const downloadImage = () => {
-        const link = document.createElement("a");
-        link.href = canvas.value.toDataURL("image/webp");
-        link.download = "edited-photo-by-KrzychuK.webp";
-        link.click();
+    // Download images as WebP
+    const downloadImages = () => {
+      files.value.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            canvas.toBlob((blob) => {
+              const link = document.createElement("a");
+              link.href = URL.createObjectURL(blob);
+              link.download = file.name.replace(/\.[^/.]+$/, "") + ".webp";
+              link.click();
+            }, "image/webp");
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
     };
 
     // Set the background on component mount
     onMounted(() => {
-        document.body.style.background = 'linear-gradient(to right, #614385, #516395)';
+      document.body.style.background = 'linear-gradient(to right, #614385, #516395)';
     });
 
     // Reset the background when the component is removed
     onUnmounted(() => {
-        document.body.style.background = ''
+      document.body.style.background = '';
     });
 
     return {
-      canvas,
-      imgLoaded,
+      files,
       triggerFileInput,
-      loadImage,
-      downloadImage,
-      resetImage
+      loadImages,
+      downloadImages
     };
   },
 };
 </script>
-  
+
+<style scoped>
+.file-list {
+  overflow-y: auto;
+}
+</style>
