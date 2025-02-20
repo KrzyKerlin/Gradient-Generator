@@ -9,7 +9,7 @@
       <input type="file" multiple @change="loadImages" ref="fileInput" class="d-none" id="fileInput" />
     
       <v-card v-if="files.length" class="d-flex flex-column align-center pa-4" elevation="2">
-        <div class="file-list w-100">
+        <div class="file-list w-100 h-100">
           <h3>Uploaded Files:</h3>
           <v-list dense>
             <v-list-item v-for="(file, index) in files" :key="index">
@@ -19,7 +19,7 @@
               <v-list-item-content>{{ file.name }}</v-list-item-content>
             </v-list-item>
           </v-list>
-          <v-btn color="success" class="mt-3 mx-auto" @click="downloadImages">
+          <v-btn color="success" class="d-flex justify-center align-center mt-3 mx-auto" @click="downloadImages">
             Download WebP
           </v-btn>
         </div>
@@ -37,6 +37,10 @@ export default {
     // Load the images into the files array
     const loadImages = (event) => {
       const selectedFiles = Array.from(event.target.files);
+      if (selectedFiles.length > 10) {
+        alert("You can upload a maximum of 10 images.");
+        return;
+      }
       files.value = selectedFiles;
     };
 
