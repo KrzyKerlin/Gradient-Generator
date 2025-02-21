@@ -1,7 +1,7 @@
 <template>
     <v-container class="d-flex flex-column align-center">
       <BackButton />
-      <h1 class="mb-4 text-center text-indigo-darken-4">WebP Converter</h1>
+      <h1 class="my-4 text-center text-indigo-darken-4">WebP Converter</h1>
     
       <v-btn color="primary" @click="triggerFileInput" class="my-4">
       Upload Images

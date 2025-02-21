@@ -1,60 +1,60 @@
 <template>
-    <v-container class="container">
+    <v-container class="container d-flex flex-column justify-center align-center w-100">
       <BackButton />
-      <div class="container-tool text-center">
-        <h1>My Tools App</h1>
+      <div class="container-tool text-center d-flex flex-column align-center">
+        <h1 class="text-white">My Tools App</h1>
         <v-row class="tools pb-8 d-none d-md-flex"> <!-- Hide on desktop-->
           <v-col cols="12" md="6">
-            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center ma-2 pa-2">
+            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="40">mdi-gradient-horizontal</v-icon> 
-              <h3>GRADIENT Generator</h3>
-              <v-btn :to="'/GradientGenerator'" class="btn" size="large" variant="elevated">Go</v-btn>
+              <h3 class="font-weight-medium mb-2">GRADIENT Generator</h3>
+              <v-btn :to="'/GradientGenerator'" class="btn text-white py-2 px-4" size="large" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
           <v-col cols="12" md="6">
-            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center ma-2 pa-2">
+            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="40">mdi-palette</v-icon>
-              <h3>Color PALETTE</h3>
-              <v-btn :to="'/ColorPalette'" class="btn" size="large" variant="elevated">Go</v-btn>
+              <h3 class="font-weight-medium mb-2">Color PALETTE</h3>
+              <v-btn :to="'/ColorPalette'" class="btn text-white py-2 px-4" size="large" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
           <v-col cols="12" md="6">
-            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center ma-2 pa-2">
+            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="40">mdi-format-font</v-icon>
-              <h3>FONTS List</h3>
-              <v-btn :to='"/FontsList"' class="btn" size="large" variant="elevated">Go</v-btn>
+              <h3 class="font-weight-medium mb-2">FONTS List</h3>
+              <v-btn :to='"/FontsList"' class="btn text-white py-2 px-4" size="large" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
           <v-col cols="12" md="6">
-            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center ma-2 pa-2">
+            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="40">mdi-image</v-icon>
-              <h3>WEBP Converter</h3>
-              <v-btn :to='"/WebpConverter"' class="btn" size="large" variant="elevated">Go</v-btn>
+              <h3 class="font-weight-medium mb-2">WEBP Converter</h3>
+              <v-btn :to='"/WebpConverter"' class="btn text-white py-2 px-4" size="large" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
         </v-row>
 
         <v-carousel class="d-md-none" :show-arrows="false"> <!-- Slider only on mobile -->
           <v-carousel-item v-for="(tool, i) in tools" :key="i" class="tools my-5">
-            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center ma-2 pa-2">
+            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon :start="tool.icon.start" size="40">{{ tool.icon.name }}</v-icon>
-              <h3>{{ tool.title }}</h3>
-              <v-btn :to="tool.route" class="btn" size="large" variant="elevated">Go</v-btn>
+              <h3 class="font-weight-medium mb-2">{{ tool.title }}</h3>
+              <v-btn :to="tool.route" class="btn text-white bg-primary py-2 px-4" size="large" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-carousel-item>
         </v-carousel>
       </div>
 
-      <v-responsive class="bg-space">
-        <ul class="squares">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+      <v-responsive class="bg-space w-100 h-100">
+        <ul class="squares w-100 h-100">
+          <li class="d-block"></li>
+          <li class="d-block"></li>
+          <li class="d-block"></li>
+          <li class="d-block"></li>
+          <li class="d-block"></li>
+          <li class="d-block"></li>
+          <li class="d-block"></li>
+          <li class="d-block"></li>
         </ul>
       </v-responsive>
       <Footer />

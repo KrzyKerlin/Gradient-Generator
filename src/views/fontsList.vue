@@ -64,6 +64,17 @@ export default {
       }
     };
 
+    const preloadFonts = async () => {
+      try {
+        const response = await fetch("/fonts.json");
+        const fontsData = await response.json();
+    
+        fontsData.forEach(font => loadFont(font.family));
+      } catch (error) {
+        console.error("Error preloading fonts:", error);
+      }
+    };
+
     // Function to load a font from Google Fonts into <head>
     const loadFont = (fontFamily) => {
       const link = document.createElement('link');
@@ -78,6 +89,7 @@ export default {
 
     // Set the background on component mount
     onMounted(() => {
+        preloadFonts();
         document.body.style.background = 'linear-gradient(to bottom, #8f0062, #b11adb)';
     });
 
