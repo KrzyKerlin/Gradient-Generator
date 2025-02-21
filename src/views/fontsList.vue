@@ -3,13 +3,13 @@
     <BackButton />
     <h1 class="mb-8 text-center text-primary">Font <span class="second">Picker</span><span class="third"> App</span></h1>
 
-    <div class="input-container align-center">
+    <div class="input-container align-center text-center">
       <v-text-field
           v-model="userText"
           label="Enter your text here..."
           outlined
           dense
-          class="text-input"
+          class="text-input text-black"
           color="primary"
           append-icon="mdi-pencil" 
         />
@@ -17,25 +17,24 @@
     </div>
 
     <!-- Fonts container -->
-    <v-row class="fonts-container" v-if="fonts.length > 0" justify="center">
+    <v-row class="my-4" v-if="fonts.length > 0" justify="center">
       <v-col
         v-for="font in fonts"
         :key="font.family"
         cols="12" sm="6" md="3"
         class="font-item d-flex flex-column align-center justify-center"
       >
-        <v-card :style="{ fontFamily: font.family}" @click="selectFont(font)" 
+        <v-card 
+          :style="{ fontFamily: font.family}" 
+          @mouseover="hoverFont = font.family" 
+          @mouseleave="hoverFont = ''" 
           class="d-flex flex-column align-center justify-center">
-          <v-card-text class="text-center d-flex align-center justify-center text-box">{{ userText || 'Sample Text' }}
+          <v-card-text class="text-center d-flex align-center justify-center text-box my-2">{{ userText || 'Sample Text' }}
           </v-card-text>
+          <div v-if="hoverFont === font.family" class="font-name text-primary font-weight-medium">{{ font.family }}</div>
         </v-card>
       </v-col>
     </v-row>
-
-    <!-- Selected font -->
-    <div v-if="selectedFont" class="mt-4">
-      <p>Selected Font: <strong>{{ selectedFont }}</strong></p>
-    </div>
   </v-container>
 </template>
 
@@ -47,7 +46,7 @@ export default {
   setup() {
     const userText = ref("");
     const fonts = ref([]);
-    const selectedFont = ref("");
+    const hoverFont = ref("");
 
     // Load Json fonts 
     const loadFonts = async () => {
@@ -83,10 +82,6 @@ export default {
       document.head.appendChild(link);
     };
 
-    const selectFont = (font) => {
-      selectedFont.value = font.family;
-    };
-
     // Set the background on component mount
     onMounted(() => {
         preloadFonts();
@@ -101,9 +96,8 @@ export default {
     return {
       userText,
       fonts,
-      selectedFont,
       loadFonts,
-      selectFont,
+      hoverFont
     };
   },
 };
@@ -122,13 +116,8 @@ h1 span.third {
   font-family: 'Luckiest Guy', cursive;
 }
 
-.input-container {
-  text-align: center;
-}
-
 .v-text-field {
-  width: 350px;
-  color: black; 
+  width: 350px; 
   font-size: 1.8rem;
 }
 
@@ -139,6 +128,11 @@ h1 span.third {
 
 .v-card-text {
   font-size: clamp(1.5rem, 2vw, 3rem);
+}
+
+.font-name {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
 }
 
 </style>
