@@ -137,7 +137,9 @@ export default {
 
     // Copy CSS code
     const copyToClipboard = () => {
-      navigator.clipboard.writeText(cssCode.value).then(() => {
+      // Check if writeText is supported
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(cssCode.value).then(() => {
         const button = document.getElementById('copyCode');
         if (button) {
           button.textContent = 'Copied :)';
@@ -146,6 +148,23 @@ export default {
           }, 2000);
         }
       });
+      } else {
+        // Fallback method for browsers that do not support writeText
+        const textArea = document.createElement('textarea');
+        textArea.value = cssCode.value;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+
+        const button = document.getElementById('copyCode');
+        if (button) {
+          button.textContent = 'Copied :)';
+          setTimeout(() => {
+            button.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
+          }, 2000);
+        }
+      }
     };
 
     return {
