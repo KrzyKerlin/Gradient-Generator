@@ -3,33 +3,40 @@
       <BackButton />
       <div class="container-tool text-center d-flex flex-column align-center">
         <h1 class="text-white">My Tools App</h1>
-        <v-row class="tools pb-8 d-none d-md-flex"> <!-- Hide on desktop-->
-          <v-col cols="12" md="6">
+        <v-row class="tools pb-8 d-none d-md-flex"> <!-- Desktop layout -->
+          <v-col cols="12" md="4">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
-              <v-icon start size="40">mdi-gradient-horizontal</v-icon> 
+              <v-icon start size="30">mdi-gradient-horizontal</v-icon> 
               <h3 class="font-weight-medium mb-2">GRADIENT Generator</h3>
-              <v-btn :to="'/GradientGenerator'" class="btn text-white py-2 px-4" size="large" variant="elevated">Go</v-btn>
+              <v-btn :to="'/GradientGenerator'" class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="4">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
-              <v-icon start size="40">mdi-palette</v-icon>
+              <v-icon start size="30">mdi-palette</v-icon>
               <h3 class="font-weight-medium mb-2">Color PALETTE</h3>
-              <v-btn :to="'/ColorPalette'" class="btn text-white py-2 px-4" size="large" variant="elevated">Go</v-btn>
+              <v-btn :to="'/ColorPalette'" class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="4">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
-              <v-icon start size="40">mdi-format-font</v-icon>
+              <v-icon start size="30">mdi-format-font</v-icon>
               <h3 class="font-weight-medium mb-2">FONTS List</h3>
-              <v-btn :to='"/FontsList"' class="btn text-white py-2 px-4" size="large" variant="elevated">Go</v-btn>
+              <v-btn :to='"/FontsList"' class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
           <v-col cols="12" md="6">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
-              <v-icon start size="40">mdi-image</v-icon>
+              <v-icon start size="30">mdi-image</v-icon>
               <h3 class="font-weight-medium mb-2">WEBP Converter</h3>
-              <v-btn :to='"/WebpConverter"' class="btn text-white py-2 px-4" size="large" variant="elevated">Go</v-btn>
+              <v-btn :to='"/WebpConverter"' class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
+            </v-sheet>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
+              <v-icon start size="30">mdi-text-box-edit</v-icon>
+              <h3 class="font-weight-medium mb-2">Colors DESIGN</h3>
+              <v-btn :to='"/ColorsDesign"' class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
         </v-row>
@@ -70,6 +77,7 @@ export default {
         { icon: { name: 'mdi-palette', start: true }, title: 'Color PALETTE', route: '/ColorPalette' },
         { icon: { name: 'mdi-format-font', start: true }, title: 'FONTS List', route: '/FontsList' },
         { icon: { name: 'mdi-image', start: true }, title: 'WEBP Converter', route: '/WebpConverter' },
+        { icon: { name: 'mdi-text-box-edit', start: true }, title: 'Colors DESIGN', route: '/ColorsDesign' },
       ],
     };
   },
