@@ -3,22 +3,31 @@
     <BackButton />
     <v-card class="mx-auto pa-6 text-center" max-width="500" elevation="10">
       <!-- Gradient Text -->
-      <v-sheet class="mb-4">
+      <v-sheet class="mb-2">
         <p ref="gradientText" class="text-h2 font-weight-bold text-gradient">
           GRADIENT
         </p>
       </v-sheet>
 
-      <v-row class="mb-4">
-        <v-col cols="6" class="d-flex flex-column align-center">
+      <v-row class="m-2">
+        <v-col cols="4" class="d-flex flex-column align-center">
           <label for="color1">Color 1</label>
           <input type="color" id="color1" v-model="color1" class="color-picker" />
         </v-col>
-        <v-col cols="6" class="d-flex flex-column align-center">
+        <v-col cols="4" class="d-flex flex-column align-center">
           <label for="color2">Color 2</label>
           <input type="color" id="color2" v-model="color2" class="color-picker" />
         </v-col>
+        <v-col v-if="showThirdColor" cols="4" class="d-flex flex-column align-center">
+          <label for="color3">Color 3</label>
+          <input type="color" id="color3" v-model="color3" class="color-picker" />
+        </v-col>
       </v-row>
+  
+      <!-- Button to toggle the third color -->
+      <v-btn @click="toggleThirdColor" color="primary" class="my-4">
+        {{ showThirdColor ? '-' : '+' }}3 Color
+      </v-btn>
 
       <v-row dense>
         <v-col v-for="dir in directions" :key="dir.value" cols="3">
@@ -56,6 +65,8 @@ export default {
   setup() {
     const color1 = ref('#0000ff');
     const color2 = ref('#09cbfb');
+    const color3 = ref('#0000ff');  // same like color 1
+    const showThirdColor = ref(false);
     const direction = ref('to right');
     const cssCode = ref('');
     const gradientText = ref(null);
@@ -73,7 +84,12 @@ export default {
 
     // Update the gradient
     const updateGradient = () => {
-      const gradientCSS = `linear-gradient(${direction.value}, ${color1.value}, ${color2.value})`;
+      let gradientCSS;
+      if (showThirdColor.value) {
+        gradientCSS = `linear-gradient(${direction.value}, ${color1.value}, ${color2.value}, ${color3.value})`;
+      } else {
+        gradientCSS = `linear-gradient(${direction.value}, ${color1.value}, ${color2.value})`;
+      }
 
       // Apply the gradient to the entire background (only within this component)
       document.body.style.background = gradientCSS;
@@ -97,6 +113,12 @@ export default {
       `;
     };
 
+    // Toggle the visibility of the third color picker
+    const toggleThirdColor = () => {
+      showThirdColor.value = !showThirdColor.value;
+      updateGradient();
+    };
+
     // Set the gradient when the component initializes
     onMounted(updateGradient);
 
@@ -106,7 +128,7 @@ export default {
     });
 
     // Track changes in color values and direction
-    watch([color1, color2, direction], updateGradient, { immediate: true });
+    watch([color1, color2, color3, direction, showThirdColor], updateGradient, { immediate: true });
 
     // Set a new gradient direction
     const setDirection = (dir) => {
@@ -129,7 +151,10 @@ export default {
     return {
       color1,
       color2,
+      color3,
       gradientText,
+      showThirdColor,
+      toggleThirdColor,
       direction,
       directions,
       setDirection,
