@@ -13,26 +13,28 @@
         <v-card class="pa-6 text-center bg-white lighten-3 elevation-10 rounded-lg">
           <v-row class="mb-2">
             <v-col cols="6" class="d-flex flex-column align-center">
-              <label for="bgColor">Background Color</label>
+              <label for="bgColor" style="white-space: nowrap;" >Bg Color</label>
               <input type="color" id="bgColor" v-model="bgColor" class="color-picker" />
             </v-col>
             <v-col cols="6" class="d-flex flex-column align-center">
-              <label for="textColor">Text Color</label>
+              <label for="textColor" style="white-space: nowrap;">Txt Color</label>
               <input type="color" id="textColor" v-model="textColor" class="color-picker" />
             </v-col>
             <!-- Button Color Picker --> 
             <v-col cols="6" class="d-flex flex-column align-center"> 
-              <label for="buttonBgColor">Button Background</label> 
+              <label for="buttonBgColor" style="white-space: nowrap;">Button Bg</label> 
               <input type="color" id="buttonBgColor" v-model="buttonBgColor" class="color-picker" /> 
             </v-col> 
             <v-col cols="6" class="d-flex flex-column align-center"> 
-              <label for="buttonTextColor">Button Text</label> 
+              <label for="buttonTextColor" style="white-space: nowrap;">Button Txt</label> 
               <input type="color" id="buttonTextColor" v-model="buttonTextColor" class="color-picker" /> 
             </v-col> 
           </v-row>
+          <!-- Reset Button --> 
+          <v-btn color="error" @click="resetColors">Reset Colors</v-btn>
         </v-card>
       </v-col>
-      
+
     </v-row>
   </v-container>
 </template>
@@ -68,12 +70,20 @@
       watch([bgColor, textColor, buttonBgColor, buttonTextColor], () => {
         document.body.style.background = bgColor.value;
       }, { immediate: true });
+
+      const resetColors = () => { 
+        bgColor.value = defaultColors.bgColor; 
+        textColor.value = defaultColors.textColor; 
+        buttonBgColor.value = defaultColors.buttonBgColor; 
+        buttonTextColor.value = defaultColors.buttonTextColor; 
+      };
   
       return {
         bgColor,
         textColor,
         buttonBgColor, 
         buttonTextColor,
+        resetColors,
       };
     }
   };
