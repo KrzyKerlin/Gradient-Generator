@@ -128,6 +128,7 @@ h1 span.third {
 
 .v-card-text {
   font-size: clamp(1.5rem, 2vw, 3rem);
+  text-wrap: nowrap;
 }
 
 .font-name {

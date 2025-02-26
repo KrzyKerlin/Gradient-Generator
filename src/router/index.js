@@ -5,7 +5,8 @@ import GradientGenerator from '../views/gradientGenerator.vue';
 import ColorPalette from '../views/colorPalette.vue';
 import FontsList from '../views/fontsList.vue';
 import WebpConverter from '../views/webpConverter.vue';
-import ColorsDesign from '../views/colorsDesign.vue'
+import ColorsDesign from '../views/colorsDesign.vue';
+import Buttons from '../views/buttons.vue'
 
 const routes = [
     { path: "/", component: Home},
@@ -13,7 +14,8 @@ const routes = [
     { path: "/colorPalette", component: ColorPalette},
     { path: "/fontsList", component: FontsList},
     { path: "/webpConverter", component: WebpConverter},
-    { path: "/colorsDesign", component: ColorsDesign}
+    { path: "/colorsDesign", component: ColorsDesign},
+    {path: "/buttons", component: Buttons}
 ];
 
 const router = createRouter({
