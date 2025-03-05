@@ -11,7 +11,7 @@
         <v-card-text>
           <v-form>
             <v-text-field v-model="note.title" label="Title"></v-text-field>
-            <v-textarea v-model="note.content" label="Code Note" auto-grow></v-textarea>
+            <v-textarea v-model="note.content" label="</>" auto-grow></v-textarea>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -21,19 +21,18 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-row>
-      <v-col cols="12" sm="6" md="3" v-for="(note, index) in notes" :key="index">
-        <v-card>
-          <v-card-title>
-            {{ note.title }}
+    <v-row class="w-100" justify="center">
+      <v-col cols="6" md="3" v-for="(note, index) in notes" :key="index">
+        <v-card class="d-flex flex-column align-center">
+          <v-card-title>{{ note.title }}
             <v-spacer></v-spacer>
+            </v-card-title>
+              <v-card-text>{{ note.content }}</v-card-text>
+            <v-card-actions>
+            <v-btn text @click="editNote(index)">Edit</v-btn>
             <v-btn icon @click.stop="deleteNote(index)">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
-          </v-card-title>
-          <v-card-text>{{ note.content }}</v-card-text>
-          <v-card-actions>
-            <v-btn text @click="editNote(index)">Edit</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
