@@ -1,7 +1,7 @@
 <template>
   <v-container class="d-flex flex-column align-center w-100">
     <BackButton />
-    <h1 class="my-4 text-center text-indigo-darken-4">Code Notes</h1>
+    <h1 class="my-4 text-center text-primary">Code Notes</h1>
     <v-btn color="primary" dark @click="openNewNoteDialog" class="mb-4">Add Note</v-btn>
     <v-dialog v-model="showDialog" max-width="600">
       <v-card>
@@ -11,6 +11,15 @@
         <v-card-text>
           <v-form>
             <v-text-field v-model="note.title" label="Title"></v-text-field>
+            <v-select
+              v-model="note.language"
+              :items="languages"
+              item-text="text"
+              label="Language"
+              return-object
+              :item-title="item => item.text"
+              :item-value="item => item"
+            ></v-select>
             <v-textarea v-model="note.content" label="</>" auto-grow></v-textarea>
           </v-form>
         </v-card-text>
@@ -22,13 +31,15 @@
       </v-card>
     </v-dialog>
     <v-row class="w-100" justify="center">
-      <v-col cols="6" md="3" v-for="(note, index) in notes" :key="index">
-        <v-card class="d-flex flex-column align-center">
-          <v-card-title>{{ note.title }}
+      <v-col cols="12" md="4" lg="3" v-for="(note, index) in notes" :key="index" class="m-2" >
+        <v-card class="d-flex flex-column align-center note" :style="{ backgroundColor: note.color }">
+          <v-card-title>
+             {{ note.title }}
             <v-spacer></v-spacer>
-            </v-card-title>
-              <v-card-text>{{ note.content }}</v-card-text>
-            <v-card-actions>
+          </v-card-title>
+          <v-spacer></v-spacer>
+          <v-icon>{{ note.language.icon }}</v-icon>
+          <v-card-actions>
             <v-btn text @click="editNote(index)">Edit</v-btn>
             <v-btn icon @click.stop="deleteNote(index)">
               <v-icon>mdi-delete</v-icon>
@@ -44,20 +55,30 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 export default {
   name: 'CodeNotes',
   setup() {
     const showDialog = ref(false);
     const notes = ref([]);
-    const note = ref({ title: '', content: '' });
+    const note = ref({ title: '', content: '', language: { text: '', icon: '' } });
     const dialogTitle = ref('Add Code');
+    const languages = ref([
+      { text: 'HTML', icon: 'mdi-language-html5' },
+      { text: 'CSS', icon: 'mdi-language-css3' },
+      { text: 'JavaScript', icon: 'mdi-language-javascript' }
+    ]);
+    const languageColors = {
+      HTML: '#ff5733',
+      CSS: '#03A1FC',
+      JavaScript: '#DED009'
+    };
     const editingIndex = ref(null);
     const snackbar = ref(false);
 
     const openNewNoteDialog = () => {
-      note.value = { title: '', content: '' };
+      note.value = { title: '', content: '', language: { text: '', icon: '' } };
       dialogTitle.value = 'Add Code';
       editingIndex.value = null;
       showDialog.value = true;
@@ -68,6 +89,7 @@ export default {
     };
 
     const saveNote = () => {
+      note.value.color = languageColors[note.value.language.text] || '';  /* note background color HTML, CSS and JS */
       if (editingIndex.value !== null) {
         notes.value[editingIndex.value] = { ...note.value };
       } else {
@@ -88,12 +110,23 @@ export default {
       notes.value.splice(index, 1);
     };
 
+    // Set the background on component mount
+    onMounted(() => {
+        document.body.style.background = 'linear-gradient(to right, #4F4F92, #2D2D52)';
+      });
+
+      // Reset the background when the component is removed
+      onUnmounted(() => {
+        document.body.style.background = ''
+      });
+
     return {
       showDialog,
       notes,
       note,
       dialogTitle,
       openNewNoteDialog,
+      languages,
       closeDialog,
       saveNote,
       editNote,
@@ -103,3 +136,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.note {
+  height: 200px;
+}
+</style>

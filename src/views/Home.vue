@@ -93,6 +93,7 @@ export default {
         { icon: { name: 'mdi-image', start: true }, title: 'WEBP Converter', route: '/WebpConverter' },
         { icon: { name: 'mdi-text-box-edit', start: true }, title: 'Colors DESIGN', route: '/ColorsDesign' },
         { icon: { name: 'mdi-format-line-style', start: true }, title: 'BUTTONS', route: '/Buttons' },
+        { icon: { name: 'mdi-code-block-tags', start: true }, title: 'CODE Notes', route: '/CodeNotes' },
       ],
     };
   },
