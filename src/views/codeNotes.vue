@@ -6,24 +6,41 @@
     <v-dialog v-model="showDialog" max-width="600">
       <v-card>
         <v-card-title>
-          <span class="headline">Title</span>
+          <span class="headline">{{ dialogTitle }}</span>
         </v-card-title>
         <v-card-text>
           <v-form>
-            <v-textarea></v-textarea>
+            <v-text-field v-model="note.title" label="Title"></v-text-field>
+            <v-textarea v-model="note.content" label="Code Note" auto-grow></v-textarea>
           </v-form>
         </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="closeDialog">Cancel</v-btn>
+          <v-btn color="blue darken-1" text @click="saveNote">Save</v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
     <v-row>
-      <v-col cols="12" sm="6" md="3">
+      <v-col cols="12" sm="6" md="3" v-for="(note, index) in notes" :key="index">
         <v-card>
+          <v-card-title>
+            {{ note.title }}
+            <v-spacer></v-spacer>
+            <v-btn icon @click.stop="deleteNote(index)">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+          </v-card-title>
+          <v-card-text>{{ note.content }}</v-card-text>
           <v-card-actions>
-            <v-btn text @click="openDialog()">View Code</v-btn>
+            <v-btn text @click="editNote(index)">Edit</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
+    <v-snackbar v-model="snackbar" timeout="2000" color="green" class="d-flex justify-center align-end w-10">
+      Note saved!
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -34,21 +51,56 @@ export default {
   name: 'CodeNotes',
   setup() {
     const showDialog = ref(false);
+    const notes = ref([]);
+    const note = ref({ title: '', content: '' });
+    const dialogTitle = ref('Add Code');
+    const editingIndex = ref(null);
+    const snackbar = ref(false);
 
     const openNewNoteDialog = () => {
-      showDialog.value = true; 
+      note.value = { title: '', content: '' };
+      dialogTitle.value = 'Add Code';
+      editingIndex.value = null;
+      showDialog.value = true;
     };
 
-    const openDialog = () => {
+    const closeDialog = () => {
+      showDialog.value = false;
+    };
+
+    const saveNote = () => {
+      if (editingIndex.value !== null) {
+        notes.value[editingIndex.value] = { ...note.value };
+      } else {
+        notes.value.push({ ...note.value });
+      }
+      closeDialog();
+      snackbar.value = true; 
+    };
+
+    const editNote = (index) => {
+      note.value = { ...notes.value[index] };
+      dialogTitle.value = 'Edit Note';
+      editingIndex.value = index;
       showDialog.value = true;
+    };
+
+    const deleteNote = (index) => {
+      notes.value.splice(index, 1);
     };
 
     return {
       showDialog,
+      notes,
+      note,
+      dialogTitle,
       openNewNoteDialog,
-      openDialog,
+      closeDialog,
+      saveNote,
+      editNote,
+      deleteNote,
+      snackbar,
     };
   },
 };
 </script>
-
