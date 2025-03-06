@@ -93,8 +93,9 @@ export default {
       } else {
         notes.value.push({ ...note.value });
       }
+      saveToLocalStorage();
       closeDialog();
-      snackbar.value = true; 
+      snackbar.value = true;
     };
 
     const editNote = (index) => {
@@ -106,17 +107,30 @@ export default {
 
     const deleteNote = (index) => {
       notes.value.splice(index, 1);
+      saveToLocalStorage();
     };
 
-    // Set the background on component mount
-    onMounted(() => {
-        document.body.style.background = 'linear-gradient(to right, #4F4F92, #2D2D52)';
-      });
+    const saveToLocalStorage = () => {
+      localStorage.setItem('codeNotes', JSON.stringify(notes.value));
+    };
 
-      // Reset the background when the component is removed
-      onUnmounted(() => {
-        document.body.style.background = ''
-      });
+    const loadFromLocalStorage = () => {
+      const storedNotes = localStorage.getItem('codeNotes');
+      if (storedNotes) {
+        notes.value = JSON.parse(storedNotes);
+      }
+    };
+
+    // Load notes when the component is mounted
+    onMounted(() => {
+      document.body.style.background = 'linear-gradient(to right, #4F4F92, #2D2D52)';
+      loadFromLocalStorage();
+    });
+
+    // Reset the background when the component is removed
+    onUnmounted(() => {
+      document.body.style.background = '';
+    });
 
     return {
       showDialog,
