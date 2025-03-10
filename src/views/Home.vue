@@ -32,25 +32,32 @@
               <v-btn :to='"/WebpConverter"' class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="3">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="30">mdi-text-box-edit</v-icon>
               <h3 class="font-weight-medium mb-2">Colors DESIGN</h3>
               <v-btn :to='"/ColorsDesign"' class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="3">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="30">mdi-format-line-style</v-icon>
               <h3 class="font-weight-medium mb-2">BUTTONS</h3>
               <v-btn :to='"/Buttons"' class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="3">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="30">mdi-code-block-tags</v-icon>
               <h3 class="font-weight-medium mb-2">CODE Notes</h3>
               <v-btn :to="'/CodeNotes'" class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
+            </v-sheet>
+          </v-col>
+          <v-col cols="12" md="3">
+            <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
+              <v-icon start size="30">mdi-apps</v-icon>
+              <h3 class="font-weight-medium mb-2">ICONS List</h3>
+              <v-btn :to="'/IconsList'" class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
             </v-sheet>
           </v-col>
         </v-row>
@@ -94,6 +101,7 @@ export default {
         { icon: { name: 'mdi-text-box-edit', start: true }, title: 'Colors DESIGN', route: '/ColorsDesign' },
         { icon: { name: 'mdi-format-line-style', start: true }, title: 'BUTTONS', route: '/Buttons' },
         { icon: { name: 'mdi-code-block-tags', start: true }, title: 'CODE Notes', route: '/CodeNotes' },
+        { icon: { name: 'mdi-apps', start: true }, title: 'ICONS List', route: '/IconsList' },
       ],
     };
   },
