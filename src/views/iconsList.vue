@@ -7,7 +7,7 @@
       <v-card-text>
         <v-row dense>
           <v-col
-            v-for="(icon, index) in icons"
+            v-for="(icon, index) in paginatedIcons"
             :key="`${icon}-${index}`"
             cols="3"
             class="d-flex flex-column align-center"
@@ -18,18 +18,33 @@
             <small class="mt-2 text-center gray">{{ icon }}</small>
           </v-col>
         </v-row>
+        <!-- Pagination Controls -->
+        <v-pagination
+          v-model="currentPage"
+          :length="Math.ceil(icons.length / pageSize)"
+          class="mt-4"
+        ></v-pagination>
       </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 
 export default {
   name: "IconsList",
   setup() {
     const icons = ref([]);
+    const currentPage = ref(1); // Current page for pagination
+    const pageSize = 24; // Number of icons per page
+
+    // Computed property to calculate paginated icons
+    const paginatedIcons = computed(() => {
+      const start = (currentPage.value - 1) * pageSize;
+      const end = start + pageSize;
+      return icons.value.slice(start, end);
+    });
 
     const loadIcons = async () => {
       try {
@@ -50,7 +65,7 @@ export default {
     // Set the background on component mount
     onMounted(() => {
       document.body.style.background = 'linear-gradient(to right, #8987e3, #c4c4e4)';
-      loadIcons;
+      loadIcons();
     });
 
     // Reset the background when the component is removed
@@ -58,7 +73,12 @@ export default {
       document.body.style.background = '';
     });
 
-    return { icons };
+    return { 
+      icons, 
+      currentPage, 
+      pageSize, 
+      paginatedIcons 
+    };
   },
 };
 </script>
