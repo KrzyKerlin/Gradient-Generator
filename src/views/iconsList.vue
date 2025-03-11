@@ -2,7 +2,7 @@
   <v-container class="d-flex flex-column align-center pa-4">
     <BackButton />
     <h1 class="my-4 text-center text-primary">Font Awesome Icons</h1>
-    <v-card elevation="3">
+    <v-card elevation="3" class="w-100">
       <v-card-title class="text-h5 text-center">Icons</v-card-title>
       <v-card-text>
         <v-row dense>
