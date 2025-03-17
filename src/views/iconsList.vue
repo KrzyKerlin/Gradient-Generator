@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 
 export default {
   name: "IconsList",
@@ -72,6 +72,11 @@ export default {
       const start = (currentPage.value - 1) * pageSize;
       const end = start + pageSize;
       return filteredIcons.value.slice(start, end);
+    });
+
+    // Reset page to 1 when search query changes
+    watch(searchQuery, () => {
+      currentPage.value = 1;
     });
 
     const loadIcons = async () => {
