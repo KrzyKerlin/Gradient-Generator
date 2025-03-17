@@ -58,88 +58,86 @@
   </v-container>
 </template>
 
-<script>
-import { ref, watch, onMounted, onUnmounted } from 'vue';
+<script setup>
+  import { ref, watch, onMounted, onUnmounted } from 'vue';
 
-export default {
-  setup() {
-    const color1 = ref('#0000ff');
-    const color2 = ref('#09cbfb');
-    const color3 = ref('#0000ff');  // same like color 1
-    const showThirdColor = ref(false);
-    const direction = ref('to right');
-    const cssCode = ref('');
-    const gradientText = ref(null);
+  const color1 = ref('#0000ff');
+  const color2 = ref('#09cbfb');
+  const color3 = ref('#0000ff');  // same like color 1
+  const showThirdColor = ref(false);
+  const direction = ref('to right');
+  const cssCode = ref('');
+  const gradientText = ref(null);
 
-    const directions = [
-      { value: 'to right', icon: '→' },
-      { value: 'to left', icon: '←' },
-      { value: 'to bottom', icon: '↓' },
-      { value: 'to top', icon: '↑' },
-      { value: 'to bottom right', icon: '↘' },
-      { value: 'to bottom left', icon: '↙' },
-      { value: 'to top right', icon: '↗' },
-      { value: 'to top left', icon: '↖' },
-    ];
+  const directions = [
+    { value: 'to right', icon: '→' },
+    { value: 'to left', icon: '←' },
+    { value: 'to bottom', icon: '↓' },
+    { value: 'to top', icon: '↑' },
+    { value: 'to bottom right', icon: '↘' },
+    { value: 'to bottom left', icon: '↙' },
+    { value: 'to top right', icon: '↗' },
+    { value: 'to top left', icon: '↖' },
+  ];
 
-    // Update the gradient
-    const updateGradient = () => {
-      let gradientCSS;
-      if (showThirdColor.value) {
-        gradientCSS = `linear-gradient(${direction.value}, ${color1.value}, ${color2.value}, ${color3.value})`;
-      } else {
-        gradientCSS = `linear-gradient(${direction.value}, ${color1.value}, ${color2.value})`;
-      }
+  // Update the gradient
+  const updateGradient = () => {
+    let gradientCSS;
+    if (showThirdColor.value) {
+      gradientCSS = `linear-gradient(${direction.value}, ${color1.value}, ${color2.value}, ${color3.value})`;
+    } else {
+      gradientCSS = `linear-gradient(${direction.value}, ${color1.value}, ${color2.value})`;
+    }
 
-      // Apply the gradient to the entire background (only within this component)
-      document.body.style.background = gradientCSS;
+    // Apply the gradient to the entire background (only within this component)
+    document.body.style.background = gradientCSS;
 
-      // Apply gradient effect to the text
-      if (gradientText.value) {
-        gradientText.value.style.background = gradientCSS;
-        gradientText.value.style.webkitBackgroundClip = 'text';
-        gradientText.value.style.webkitTextFillColor = 'transparent';
-        gradientText.value.style.backgroundClip = 'text';
-        gradientText.value.style.color = 'transparent';
-      }
+    // Apply gradient effect to the text
+    if (gradientText.value) {
+      gradientText.value.style.background = gradientCSS;
+      gradientText.value.style.webkitBackgroundClip = 'text';
+      gradientText.value.style.webkitTextFillColor = 'transparent';
+      gradientText.value.style.backgroundClip = 'text';
+      gradientText.value.style.color = 'transparent';
+    }
 
-      // Generate CSS code
-      cssCode.value = `
-        background: ${gradientCSS};
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
-      `;
-    };
+    // Generate CSS code
+    cssCode.value = `
+      background: ${gradientCSS};
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    `;
+  };
 
-    // Toggle the visibility of the third color picker
-    const toggleThirdColor = () => {
-      showThirdColor.value = !showThirdColor.value;
-      updateGradient();
-    };
+  // Toggle the visibility of the third color picker
+  const toggleThirdColor = () => {
+    showThirdColor.value = !showThirdColor.value;
+    updateGradient();
+  };
 
-    // Set the gradient when the component initializes
-    onMounted(updateGradient);
+  // Set the gradient when the component initializes
+  onMounted(updateGradient);
 
-    // Reset the background when the component is removed
-    onUnmounted(() => {
-      document.body.style.background = '';
-    });
+  // Reset the background when the component is removed
+  onUnmounted(() => {
+    document.body.style.background = '';
+  });
 
-    // Track changes in color values and direction
-    watch([color1, color2, color3, direction, showThirdColor], updateGradient, { immediate: true });
+  // Track changes in color values and direction
+  watch([color1, color2, color3, direction, showThirdColor], updateGradient, { immediate: true });
 
-    // Set a new gradient direction
-    const setDirection = (dir) => {
-      direction.value = dir;
-    };
+  // Set a new gradient direction
+  const setDirection = (dir) => {
+    direction.value = dir;
+  };
 
-    // Copy CSS code
-    const copyToClipboard = () => {
-      // Check if writeText is supported
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(cssCode.value).then(() => {
+  // Copy CSS code
+  const copyToClipboard = () => {
+    // Check if writeText is supported
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(cssCode.value).then(() => {
         const button = document.getElementById('copyCode');
         if (button) {
           button.textContent = 'Copied :)';
@@ -148,51 +146,35 @@ export default {
           }, 2000);
         }
       });
-      } else {
-        // Fallback method for browsers that do not support writeText
-        const textArea = document.createElement('textarea');
-        textArea.value = cssCode.value;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
+    } else {
+      // Fallback method for browsers that do not support writeText
+      const textArea = document.createElement('textarea');
+      textArea.value = cssCode.value;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
 
-        const button = document.getElementById('copyCode');
-        if (button) {
-          button.textContent = 'Copied :)';
-          setTimeout(() => {
-            button.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
-          }, 2000);
-        }
+      const button = document.getElementById('copyCode');
+      if (button) {
+        button.textContent = 'Copied :)';
+        setTimeout(() => {
+          button.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
+        }, 2000);
       }
-    };
-
-    return {
-      color1,
-      color2,
-      color3,
-      gradientText,
-      showThirdColor,
-      toggleThirdColor,
-      direction,
-      directions,
-      setDirection,
-      cssCode,
-      copyToClipboard,
-    };
-  }
-};
+    }
+  };
 </script>
   
 <style scoped>
-.color-picker {
-  width: 4rem;
-  height: 4rem;
-  cursor: pointer;
-}
+  .color-picker {
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+  }
 
-.gradient-code {
-  min-height: 120px;
-}
+  .gradient-code {
+    min-height: 120px;
+  }
 </style>
   

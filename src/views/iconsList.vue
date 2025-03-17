@@ -45,146 +45,126 @@
   </v-container>
 </template>
 
-<script>
-import { ref, computed, watch, onMounted, onUnmounted } from "vue";
+<script setup>
+  import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 
-export default {
-  name: "IconsList",
-  setup() {
-    const icons = ref([]);
-    const searchQuery = ref(""); // Search query for filtering
-    const currentPage = ref(1); // Current page for pagination
-    const pageSize = 24; // Number of icons per page
-    const selectedIcon = ref("");
-    const isPopupOpen = ref(false);
-    const isCopied = ref(false); 
+  const icons = ref([]);
+  const searchQuery = ref(""); // Search query for filtering
+  const currentPage = ref(1); // Current page for pagination
+  const pageSize = 24; // Number of icons per page
+  const selectedIcon = ref("");
+  const isPopupOpen = ref(false);
+  const isCopied = ref(false); 
 
-    // Computed property to filter icons based on search query
-    const filteredIcons = computed(() => {
-      const query = searchQuery.value.toLowerCase();
-      return icons.value.filter((icon) =>
-        icon.toLowerCase().includes(query)
-      );
+  // Computed property to filter icons based on search query
+  const filteredIcons = computed(() => {
+    const query = searchQuery.value.toLowerCase();
+    return icons.value.filter((icon) =>
+      icon.toLowerCase().includes(query)
+    );
+  });
+
+  // Computed property to calculate paginated icons
+  const paginatedIcons = computed(() => {
+    const start = (currentPage.value - 1) * pageSize;
+    const end = start + pageSize;
+    return filteredIcons.value.slice(start, end);
+  });
+
+  // Reset page to 1 when search query changes
+  watch(searchQuery, () => {
+    currentPage.value = 1;
+  });
+
+  const loadIcons = async () => {
+    try {
+      const response = await fetch("/icons.json");
+      const data = await response.json();
+
+      // Combine categories and add prefixes
+      icons.value = [
+        ...data.solid.map((icon) => `fa-solid ${icon}`),
+        ...data.regular.map((icon) => `fa-regular ${icon}`),
+        ...data.brands.map((icon) => `fa-brands ${icon}`),
+      ];
+    } catch (error) {
+      console.error("Error loading icons:", error);
+    }
+  };
+
+  // Open popup
+  const openPopup = (icon) => {
+    selectedIcon.value = icon;
+    isPopupOpen.value = true;
+  };
+
+  // Close popup
+  const closePopup = () => {
+    isPopupOpen.value = false;
+  };
+
+  // Copy icon
+  const copyToClipboard = (iconName) => {
+    if (!iconName) {
+      console.error("No icon name provided for copying!");
+      return;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(iconName).then(() => {
+      isCopied.value = true; 
+      setTimeout(() => {
+        isCopied.value = false; // Close info after 2 seconds
+      }, 2000);
     });
-
-    // Computed property to calculate paginated icons
-    const paginatedIcons = computed(() => {
-      const start = (currentPage.value - 1) * pageSize;
-      const end = start + pageSize;
-      return filteredIcons.value.slice(start, end);
-    });
-
-    // Reset page to 1 when search query changes
-    watch(searchQuery, () => {
-      currentPage.value = 1;
-    });
-
-    const loadIcons = async () => {
+    } else {
+      const textArea = document.createElement("textarea");
+      textArea.value = iconName;
+      document.body.appendChild(textArea);
+      textArea.select();
       try {
-        const response = await fetch("/icons.json");
-        const data = await response.json();
-
-        // Combine categories and add prefixes
-        icons.value = [
-          ...data.solid.map((icon) => `fa-solid ${icon}`),
-          ...data.regular.map((icon) => `fa-regular ${icon}`),
-          ...data.brands.map((icon) => `fa-brands ${icon}`),
-        ];
-      } catch (error) {
-        console.error("Error loading icons:", error);
-      }
-    };
-
-     // Open popup
-     const openPopup = (icon) => {
-      selectedIcon.value = icon;
-      isPopupOpen.value = true;
-    };
-
-    // Close popup
-    const closePopup = () => {
-      isPopupOpen.value = false;
-    };
-
-    // Copy icon
-    const copyToClipboard = (iconName) => {
-      if (!iconName) {
-        console.error("No icon name provided for copying!");
-        return;
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(iconName).then(() => {
-        isCopied.value = true; 
+        document.execCommand("copy");
+        console.log("Fallback: Copied to clipboard:", iconName);
+        isCopied.value = true;
         setTimeout(() => {
-          isCopied.value = false; // Close info after 2 seconds
+          isCopied.value = false;
         }, 2000);
-        });
-      } else {
-        const textArea = document.createElement("textarea");
-        textArea.value = iconName;
-        document.body.appendChild(textArea);
-        textArea.select();
-        try {
-          document.execCommand("copy");
-          console.log("Fallback: Copied to clipboard:", iconName);
-          isCopied.value = true;
-          setTimeout(() => {
-            isCopied.value = false;
-          }, 2000);
-        } catch (error) {
+      } catch (error) {
           console.error("Fallback: Error copying to clipboard:", error);
         }
-        document.body.removeChild(textArea);
-      }
-    };
+      document.body.removeChild(textArea);
+    }
+  };
 
-    // Set the background on component mount
-    onMounted(() => {
-      document.body.style.background = 'linear-gradient(to right, #8987e3, #c4c4e4)';
-      loadIcons();
-    });
+  // Set the background on component mount
+  onMounted(() => {
+    document.body.style.background = 'linear-gradient(to right, #8987e3, #c4c4e4)';
+    loadIcons();
+  });
 
-    // Reset the background when the component is removed
-    onUnmounted(() => {
-      document.body.style.background = '';
-    });
-
-    return {
-      icons,
-      searchQuery, 
-      currentPage, 
-      pageSize, 
-      filteredIcons,
-      paginatedIcons,
-      selectedIcon,
-      isPopupOpen,
-      openPopup,
-      closePopup,
-      copyToClipboard,
-      isCopied 
-    };
-  },
-};
+  // Reset the background when the component is removed
+  onUnmounted(() => {
+    document.body.style.background = '';
+  });
 </script>
 
 <style scoped>
-.icon-container {
-  height: 60px;
-  width: 60px;
-  cursor: pointer; 
-}
+  .icon-container {
+    height: 60px;
+    width: 60px;
+    cursor: pointer; 
+  }
 
-.icon-container:hover {
-  transform: scale(1.2); 
-  transition: transform 0.5s ease-in-out; 
-}
+  .icon-container:hover {
+    transform: scale(1.2); 
+    transition: transform 0.5s ease-in-out; 
+  }
 
-.clickable-text {
-  cursor: pointer; 
-  transition: color 0.2s;
-}
+  .clickable-text {
+    cursor: pointer; 
+    transition: color 0.2s;
+  }
 
-.clickable-text:hover {
-  color: #2575fc;
-}
+  .clickable-text:hover {
+    color: #2575fc;
+  }
 </style>

@@ -8,56 +8,56 @@
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="30">mdi-gradient-horizontal</v-icon> 
               <h3 class="font-weight-medium mb-2">GRADIENT Generator</h3>
-              <v-btn :to="'/GradientGenerator'" class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
+              <v-btn :to="'/GradientGenerator'" class="btn text-white py-2 px-4" size="medium" variant="elevated" append-icon="mdi-menu-right">Go</v-btn>
             </v-sheet>
           </v-col>
           <v-col cols="12" md="3">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="30">mdi-palette</v-icon>
               <h3 class="font-weight-medium mb-2">Color PALETTE</h3>
-              <v-btn :to="'/ColorPalette'" class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
+              <v-btn :to="'/ColorPalette'" class="btn text-white py-2 px-4" size="medium" variant="elevated" append-icon="mdi-menu-right">Go</v-btn>
             </v-sheet>
           </v-col>
           <v-col cols="12" md="3">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="30">mdi-format-font</v-icon>
               <h3 class="font-weight-medium mb-2">FONTS List</h3>
-              <v-btn :to='"/FontsList"' class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
+              <v-btn :to='"/FontsList"' class="btn text-white py-2 px-4" size="medium" variant="elevated" append-icon="mdi-menu-right">Go</v-btn>
             </v-sheet>
           </v-col>
           <v-col cols="12" md="3">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="30">mdi-image</v-icon>
               <h3 class="font-weight-medium mb-2">WEBP Converter</h3>
-              <v-btn :to='"/WebpConverter"' class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
+              <v-btn :to='"/WebpConverter"' class="btn text-white py-2 px-4" size="medium" variant="elevated" append-icon="mdi-menu-right">Go</v-btn>
             </v-sheet>
           </v-col>
           <v-col cols="12" md="3">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="30">mdi-text-box-edit</v-icon>
               <h3 class="font-weight-medium mb-2">Colors DESIGN</h3>
-              <v-btn :to='"/ColorsDesign"' class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
+              <v-btn :to='"/ColorsDesign"' class="btn text-white py-2 px-4" size="medium" variant="elevated" append-icon="mdi-menu-right">Go</v-btn>
             </v-sheet>
           </v-col>
           <v-col cols="12" md="3">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="30">mdi-format-line-style</v-icon>
               <h3 class="font-weight-medium mb-2">BUTTONS</h3>
-              <v-btn :to='"/Buttons"' class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
+              <v-btn :to='"/Buttons"' class="btn text-white py-2 px-4" size="medium" variant="elevated" append-icon="mdi-menu-right">Go</v-btn>
             </v-sheet>
           </v-col>
           <v-col cols="12" md="3">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="30">mdi-code-block-tags</v-icon>
               <h3 class="font-weight-medium mb-2">CODE Notes</h3>
-              <v-btn :to="'/CodeNotes'" class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
+              <v-btn :to="'/CodeNotes'" class="btn text-white py-2 px-4" size="medium" variant="elevated" append-icon="mdi-menu-right">Go</v-btn>
             </v-sheet>
           </v-col>
           <v-col cols="12" md="3">
             <v-sheet class="tool-box d-flex flex-column justify-space-around align-center text-center ma-2 pa-4 rounded-lg">
               <v-icon start size="30">mdi-apps</v-icon>
               <h3 class="font-weight-medium mb-2">ICONS List</h3>
-              <v-btn :to="'/IconsList'" class="btn text-white py-2 px-4" size="medium" variant="elevated">Go</v-btn>
+              <v-btn :to="'/IconsList'" class="btn text-white py-2 px-4" size="medium" variant="elevated" append-icon="mdi-menu-right">Go</v-btn>
             </v-sheet>
           </v-col>
         </v-row>

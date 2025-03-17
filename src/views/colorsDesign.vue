@@ -46,57 +46,44 @@
   </v-container>
 </template>
   
-<script>
+<script setup>
   import { ref, watch, onMounted, onUnmounted } from 'vue';
   
-  export default {
-    setup() {
-      const defaultColors = {
-        bgColor: '#6a11cb',
-        textColor: '#f457ff',
-        buttonBgColor: '#2575fc', 
-        buttonTextColor: '#ffffff',
-        socialColor: '#1877f2'
-      };
+  const defaultColors = {
+    bgColor: '#6a11cb',
+    textColor: '#f457ff',
+    buttonBgColor: '#2575fc', 
+    buttonTextColor: '#ffffff',
+    socialColor: '#1877f2'
+  };
   
-      const bgColor = ref(defaultColors.bgColor);
-      const textColor = ref(defaultColors.textColor);
-      const buttonBgColor = ref(defaultColors.buttonBgColor); 
-      const buttonTextColor = ref(defaultColors.buttonTextColor);
-      const socialColor = ref(defaultColors.socialColor);
+  const bgColor = ref(defaultColors.bgColor);
+  const textColor = ref(defaultColors.textColor);
+  const buttonBgColor = ref(defaultColors.buttonBgColor); 
+  const buttonTextColor = ref(defaultColors.buttonTextColor);
+  const socialColor = ref(defaultColors.socialColor);
   
-      // Apply the colors when the component initializes
-      onMounted(() => {
-        document.body.style.background = bgColor.value;
-      });
+  // Apply the colors when the component initializes
+  onMounted(() => {
+    document.body.style.background = bgColor.value;
+  });
   
-      // Reset the background when the component is removed
-      onUnmounted(() => {
-        document.body.style.background = '';
-      });
+  // Reset the background when the component is removed
+  onUnmounted(() => {
+    document.body.style.background = '';
+  });
   
-      // Track changes in color values
-      watch([bgColor, textColor, buttonBgColor, buttonTextColor, socialColor], () => {
-        document.body.style.background = bgColor.value;
-      }, { immediate: true });
+  // Track changes in color values
+  watch([bgColor, textColor, buttonBgColor, buttonTextColor, socialColor], () => {
+    document.body.style.background = bgColor.value;
+  }, { immediate: true });
 
-      const resetColors = () => {
-        bgColor.value = defaultColors.bgColor;
-        textColor.value = defaultColors.textColor;
-        buttonBgColor.value = defaultColors.buttonBgColor;
-        buttonTextColor.value = defaultColors.buttonTextColor;
-        socialColor.value = defaultColors.socialColor;
-      };
-  
-      return {
-        bgColor,
-        textColor,
-        buttonBgColor, 
-        buttonTextColor,
-        socialColor,
-        resetColors
-      };
-    }
+  const resetColors = () => {
+    bgColor.value = defaultColors.bgColor;
+    textColor.value = defaultColors.textColor;
+    buttonBgColor.value = defaultColors.buttonBgColor;
+    buttonTextColor.value = defaultColors.buttonTextColor;
+    socialColor.value = defaultColors.socialColor;
   };
 </script>
   
@@ -105,7 +92,6 @@
     width: 3rem;
     height: 3rem;
     cursor: pointer;
-  }
-  
+  } 
 </style>
   

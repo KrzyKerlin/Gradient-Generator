@@ -1,8 +1,7 @@
 <template>
     <v-container class="d-flex flex-column align-center">
       <BackButton />
-      <h1 class="my-4 text-center text-indigo-darken-4">WebP Converter</h1>
-    
+      <h1 class="my-4 text-center text-indigo-darken-4">WebP Converter</h1>    
       <v-btn color="primary" @click="triggerFileInput" class="my-4">
       Upload Images
       </v-btn>
@@ -27,75 +26,63 @@
     </v-container>
 </template>
   
-<script>
-import { ref, onMounted, onUnmounted } from "vue";
+<script setup>
+  import { ref, onMounted, onUnmounted } from "vue";
 
-export default {
-  setup() {
-    const files = ref([]);
+  const files = ref([]);
+  // Load the images into the files array
+  const loadImages = (event) => {
+    const selectedFiles = Array.from(event.target.files);
+    if (selectedFiles.length > 10) {
+      alert("You can upload a maximum of 10 images.");
+      return;
+    }
+    files.value = selectedFiles;
+  };
 
-    // Load the images into the files array
-    const loadImages = (event) => {
-      const selectedFiles = Array.from(event.target.files);
-      if (selectedFiles.length > 10) {
-        alert("You can upload a maximum of 10 images.");
-        return;
-      }
-      files.value = selectedFiles;
-    };
+  // Trigger file input click
+  const triggerFileInput = () => {
+    document.getElementById("fileInput").click();
+  };
 
-    // Trigger file input click
-    const triggerFileInput = () => {
-      document.getElementById("fileInput").click();
-    };
-
-    // Download images as WebP
-    const downloadImages = () => {
-      files.value.forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const img = new Image();
-          img.onload = () => {
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-            canvas.toBlob((blob) => {
-              const link = document.createElement("a");
-              link.href = URL.createObjectURL(blob);
-              link.download = file.name.replace(/\.[^/.]+$/, "") + ".webp";
-              link.click();
-            }, "image/webp");
-          };
-          img.src = e.target.result;
+  // Download images as WebP
+  const downloadImages = () => {
+    files.value.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          canvas.toBlob((blob) => {
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = file.name.replace(/\.[^/.]+$/, "") + ".webp";
+            link.click();
+          }, "image/webp");
         };
-        reader.readAsDataURL(file);
-      });
-    };
-
-    // Set the background on component mount
-    onMounted(() => {
-      document.body.style.background = 'linear-gradient(to right, #614385, #516395)';
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
     });
+  };
 
-    // Reset the background when the component is removed
-    onUnmounted(() => {
-      document.body.style.background = '';
-    });
+  // Set the background on component mount
+  onMounted(() => {
+    document.body.style.background = 'linear-gradient(to right, #614385, #516395)';
+  });
 
-    return {
-      files,
-      triggerFileInput,
-      loadImages,
-      downloadImages
-    };
-  },
-};
+  // Reset the background when the component is removed
+  onUnmounted(() => {
+    document.body.style.background = '';
+  });
 </script>
 
 <style scoped>
-.file-list {
-  overflow-y: auto;
-}
+  .file-list {
+    overflow-y: auto;
+  }
 </style>
