@@ -1,17 +1,15 @@
 <template>
   <v-container class="d-flex flex-column align-center">
     <BackButton />
-    <h1 class="mb-8 text-center text-primary">Font <span class="second">Picker</span><span class="third"> App</span></h1>
+    <h1 class="mb-8 text-center text-primary">Font <span class="second">Picker</span></h1>
     <div class="input-container align-center text-center">
       <v-text-field
-          v-model="userText"
-          label="Enter your text here..."
-          outlined
-          dense
-          class="text-input text-black"
-          color="primary"
-          append-icon="mdi-pencil" 
-        />
+        v-model="userText"
+        label="Enter your text here..." outlined dense class="text-input" color="primary">
+        <template v-slot:label>
+          <span class="text-primary">Enter your text here...</span>
+        </template>
+      </v-text-field>
       <v-btn @click="loadFonts" color="primary" class="mb-8">Show</v-btn>
     </div>
 
@@ -81,7 +79,7 @@
   // Set the background on component mount
   onMounted(() => {
     preloadFonts();
-    document.body.style.background = 'linear-gradient(to bottom, #8f0062, #b11adb)';
+    document.body.style.background = 'linear-gradient(to top, #8f0062, #370145)';
   });
 
   // Reset the background when the component is removed
@@ -97,10 +95,6 @@
 
   h1 span.second {
     font-family: 'Pacifico', cursive;
-  }
-
-  h1 span.third {
-    font-family: 'Luckiest Guy', cursive;
   }
 
   .v-text-field {
