@@ -1,7 +1,12 @@
 # my-tools-app
 
 ## 📝 Description
+
 MyTools App is a comprehensive tool for developers, graphic designers, and UI/UX designers that combines the most frequently used functions in one place. The application facilitates the design, prototyping, and testing of visual elements for websites and applications.
+
+<div align="center">
+  <img src="/src/assets/screen.png" alt="mylinksapp" width="500" />
+</div>
 
 ## ⚙️ Features
 
@@ -22,12 +27,14 @@ A tool for converting images to WebP format, which offers better compression whi
 🔘 Buttons
 A collection of ready-to-use UX button templates with various styles and effects. Each template includes complete CSS code ready for implementation. <br />
 
-
 ## 💻 Technologies
+
 Vue + Vuetify
 
 # Install dependencies
-npm install
+
+`npm install`
 
 # Serve with hot reload for development
-npm run serve
+
+`npm run tools`
