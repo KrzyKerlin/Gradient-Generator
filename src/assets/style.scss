@@ -1,140 +1,140 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: "Lexend Giga", serif;
-    background: linear-gradient(45deg, #6a11cb, #2575fc);
-    overflow: hidden;
-  
-    .container {        
-        height: 100dvh;
+  font-family: "Lexend Giga", serif;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  overflow: hidden;
 
-        .container-tool {
-            position: relative;
-            z-index: 1;
+  .container {
+    height: 100dvh;
 
-            h1 {
-              font-size: 2.5em;
-              margin: 30px auto;
-          
-              @media (min-width: 768px) {
-                font-size: 3.5em;
-                margin: 10px auto;
-              }
-            }
+    .container-tool {
+      position: relative;
+      z-index: 1;
 
-            .tools {
-              max-width: 100vw;
+      h1 {
+        font-size: 2.5em;
+        margin: 30px auto;
 
-                .tool-box {
-                    background-color: rgba(255, 255, 255, 0.8);
-                    height: 220px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    transition: transform 0.3s ease;
-                    animation: zoom-in 0.8s ease-out;
-
-                    &:hover {
-                        transform: scale(1.05);
-                    }
-
-                    @media (min-width: 768px) {
-                      height: 180px;
-                    }
-
-                    h3 {
-                        font-size: 1.5rem;
-                    }
-
-                    .btn {
-                        background-color: #2575fc;
-                        border: none;
-                        font-size: 1rem;
-                        cursor: pointer;
-                        transition: background-color 0.3s ease;
-                    
-                        &:hover {
-                            background-color: #6a11cb;
-                        }
-                    }
-                  }
-
-                @media (min-width: 768px) {
-                  .v-carousel {
-                      display: none;
-                  }
-              }
-            }
+        @media (min-width: 768px) {
+          font-size: 3.5em;
+          margin: 10px auto;
         }
-  
-        .bg-space {
-            position: absolute;
-            top: 0;
-            left: 0;
-  
-            .squares {
-                overflow: hidden;
-  
-                li {
-                    position: absolute;
-                    list-style: none;
-                    width: 20px;
-                    height: 20px;
-                    background: #ffffff33;
-                    animation: animate 25s linear infinite;
-                    bottom: -200px;
-  
-                    &:nth-child(1) {
-                        left: 25%;
-                        width: 50px;
-                        height: 50px;
-                    }
-  
-                    &:nth-child(2) {
-                        left: 80%;
-                        width: 120px;
-                        height: 120px;
-                        animation-duration: 10s;
-                    }
+      }
 
-                    &:nth-child(3) {
-                        left: 60%;
-                        width: 50px;
-                        height: 50px;
-                        animation-delay: 8s;
-                        animation-duration: 20s;
-                    }
+      .tools {
+        max-width: 100vw;
 
-                    &:nth-child(4) {
-                        left: 95%;
-                        width: 30px;
-                        height: 30px;
-                        animation-delay: 4s;
-                        animation-duration: 14s;
-                    }
+        .tool-box {
+          background-color: rgba(255, 255, 255, 0.8);
+          height: 220px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+          animation: zoom-in 0.8s ease-out;
 
-                    &:nth-child(5) {
-                        left: 10%;
-                        width: 100px;
-                        height: 100px;
-                        animation-delay: 10s;
-                        animation-duration: 8s;
-                    }
-                    
-                    &:nth-child(6){
-                        left: 45%;
-                        width: 80px;
-                        height: 80px;
-                        animation-delay: 5s;
-                    }
-                }
+          &:hover {
+            transform: scale(1.05);
+          }
+
+          @media (min-width: 768px) {
+            height: 180px;
+          }
+
+          h3 {
+            font-size: 1.5rem;
+          }
+
+          .btn {
+            background-color: #2575fc;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+              background-color: #6a11cb;
             }
+          }
         }
+
+        @media (min-width: 768px) {
+          .v-carousel {
+            display: none;
+          }
+        }
+      }
     }
+
+    .bg-space {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      .squares {
+        overflow: hidden;
+
+        li {
+          position: absolute;
+          list-style: none;
+          width: 20px;
+          height: 20px;
+          background: #ffffff33;
+          animation: animate 25s linear infinite;
+          bottom: -200px;
+
+          &:nth-child(1) {
+            left: 25%;
+            width: 50px;
+            height: 50px;
+          }
+
+          &:nth-child(2) {
+            left: 80%;
+            width: 120px;
+            height: 120px;
+            animation-duration: 10s;
+          }
+
+          &:nth-child(3) {
+            left: 60%;
+            width: 50px;
+            height: 50px;
+            animation-delay: 8s;
+            animation-duration: 20s;
+          }
+
+          &:nth-child(4) {
+            left: 95%;
+            width: 30px;
+            height: 30px;
+            animation-delay: 4s;
+            animation-duration: 14s;
+          }
+
+          &:nth-child(5) {
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            animation-delay: 10s;
+            animation-duration: 8s;
+          }
+
+          &:nth-child(6) {
+            left: 45%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 5s;
+          }
+        }
+      }
+    }
+  }
 }
 
 .v-carousel__controls {
@@ -142,34 +142,33 @@ body {
   color: #ffffffcc !important;
   bottom: 140px !important;
 }
-  
+
 /* Animations */
 @keyframes zoom-in {
-    0% {
-      transform: scale(0);
-      opacity: 0;
-    }
-    50% {
-      transform: scale(1.1);
-      opacity: 0.7;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
-  
+
 @keyframes animate {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 1;
-      border-radius: 0;
-    }
-  
-    100% {
-      transform: translateY(-1000px) rotate(720deg);
-      opacity: 0;
-      border-radius: 50%;
-    }
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
+  }
+
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
+  }
 }
-  

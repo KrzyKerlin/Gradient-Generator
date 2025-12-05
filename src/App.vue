@@ -1,12 +1,10 @@
 <template>
-    <v-app>
-        <RouterView />
-    </v-app>
+  <v-app>
+    <RouterView />
+  </v-app>
 </template>
 
-<script>
-
-</script>
+<script></script>
 
 <style>
 .v-application {
